@@ -35,7 +35,7 @@ GP2Y1010AU0F (Sharp): Compact Optical Dust Sensor. It uses an optical sensing sy
 Present system-level block diagrams, flowcharts, or pseudocode showing the planned software logic and control flow.
 
 
-'''
+```
 init() //sensors, OLED, wifi connection, timer
 
 timer_handle() :
@@ -48,4 +48,4 @@ while true:
   data = get_data()
   send_data(data, URL)
   OLED.print_data(data)
-'''
+```
