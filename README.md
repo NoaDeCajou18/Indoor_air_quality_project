@@ -40,12 +40,13 @@ init() //sensors, OLED, wifi connection, timer
 
 timer_handle() :
  cnt +=1
- ifcnt%PERIODE == 1:
+ if cnt%PERIODE == 1:
   take_measure = True
 
-while true:
+while True:
  if take_measure :
   data = get_data()
   send_data(data, URL)
   OLED.print_data(data)
+  take_measure = False
 ```
