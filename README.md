@@ -38,15 +38,13 @@ Present system-level block diagrams, flowcharts, or pseudocode showing the plann
 ```
 init() //sensors, OLED, wifi connection, timer
 
-timer_handle() :
- cnt +=1
- if cnt%PERIODE == 1:
-  take_measure = True
+timer : send event "take_measure" every PERIODE
 
 while True:
- if take_measure :
-  data = get_data()
-  send_data(data, URL)
-  OLED.print_data(data)
-  take_measure = False
+ when "take_measure" received
+  get data from DHT12 (temperature and humidity)
+  get data from MQ135 (CO2)
+  get data from SDS011 (particulate matter)
+  send data to the api.thingspeak.com
+  print data on OLED display
 ```
