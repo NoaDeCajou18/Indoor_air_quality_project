@@ -28,6 +28,7 @@ https://global.sharp/products/device/lineup/data/pdf/datasheet/gp2y1010au_e.pdf
 MQ135 (with FC-22): CO2 detector, using library (to translate)
 https://hackaday.io/project/3475-sniffing-trinket/log/12363-mq135-arduino-library
 
+GP2Y1010AU0F (Sharp): Compact Optical Dust Sensor. It uses an optical sensing system (IRED diode and phototransistor) to measure light reflected by airborne dust. It's particularly effective at detecting very fine particles like cigarette smoke.
 #Software design
 Present system-level block diagrams, flowcharts, or pseudocode showing the planned software logic and control flow.
 
