@@ -20,11 +20,7 @@ class MQ135(ADC):
     # Atmospheric CO2 level for calibration purposes
     ATMOCO2 = 397.13
 
-     
-    
-    #uint8_t _pin;
-    
-    
+
     ## @brief  Default constructor
     ## @param[in] pin  The analog input pin for the readout of the sensor
    
@@ -49,7 +45,7 @@ class MQ135(ADC):
     ## @return The sensor resistance in kOhm
 
     def getResistance(self) :
-        val = analogRead(_pin);   #TODO change using ADC
+        val = self.read();   #TODO change using ADC
         return ((1023./val) * 5. - 1.)*self.RLOAD
     
 
