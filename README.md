@@ -19,6 +19,10 @@ A MCU to collect data from sensors and send it by wifi and control OLED display 
 Provide a list of sensors, actuators, and other electronic components intended for use.
 Include justification for your component choices (why each part is needed).
 
+ESP32 board with pre-installed MicroPython firmware, USB cable
+
+SH1106 I2C OLED display 128x64 
+
 DHT12 : temperature and humidity sensor, I2C (see lab)
 
 MQ135 (with FC-22): CO2 detector, using library (to translate)
