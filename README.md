@@ -1,4 +1,7 @@
+ Indoor air quality monitoring system
+
 Problem Statement
+
 Indoor air quality has a direct impact on comfort, health, and productivity. Many indoor environments (classrooms, apartments, offices) lack continuous, reliable, and accessible monitoring of key air-quality indicators such as:
 •	Temperature
 •	Humidity
