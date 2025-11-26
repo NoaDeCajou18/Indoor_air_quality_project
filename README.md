@@ -19,16 +19,12 @@ A MCU to collect data from sensors and send it by wifi and control OLED display 
 Provide a list of sensors, actuators, and other electronic components intended for use.
 Include justification for your component choices (why each part is needed).
 
-
 DHT12 : temperature and humidity sensor, I2C (see lab)
-
-SDS011 : Laser dust sensor. Detect particles with a diameter >03μm, designed to measure PM2.5 and PM10 https://www.laskakit.cz/user/related_files/sds011_laser_pm2-5-v1-3.pdf
-
 
 MQ135 (with FC-22): CO2 detector, using library (to translate)
 https://hackaday.io/project/3475-sniffing-trinket/log/12363-mq135-arduino-library
 
-GP2Y1010AU0F (Sharp): Compact Optical Dust Sensor. It uses an optical sensing system (IRED diode and phototransistor) to measure light reflected by airborne dust. It's particularly effective at detecting very fine particles like cigarette smoke. https://global.sharp/products/device/lineup/data/pdf/datasheet/gp2y1010au_e.pdf
+GP2Y1010AU0F (Sharp): Compact Optical Dust Sensor. It uses an optical sensing system (IRED diode and phototransistor) to measure light reflected by airborne dust. It's particularly effective at detecting very fine particles. https://global.sharp/products/device/lineup/data/pdf/datasheet/gp2y1010au_e.pdf
 
 
 #Software design
