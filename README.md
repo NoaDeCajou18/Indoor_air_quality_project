@@ -1,39 +1,29 @@
-# Indoor_air_quality_project
-Digital electronics 2 (DE2) class project
+# Indoor air quality monitoring system
+
+## 1. Project Overview
+
+### Problem Statement
+Indoor air quality has a direct impact on comfort, health, and productivity. Many indoor environments (classrooms, apartments, offices) lack continuous, reliable, and accessible monitoring of key air-quality indicators such as temperature Humidity, CO₂ concentration or particulate matter (PM2.5 / PM10). Without real-time monitoring, it is difficult to detect poor ventilation conditions or pollution peaks.
+
+### Proposed Solution
+The goal of this project is to design a compact MCU-based air-quality monitoring station. An ESP32 microcontroller is used as the core of the system. It integrates Wi-Fi capability and provides enough GPIO interfaces to read the sensors and drive the display. The MCU communicates with the temperature/humidity (I2C), CO₂ and dust sensor then processes and sends them to ThingSpeak using HTTP requests and updates the OLED screen with the latest values. This creates a complete, autonomous environmental monitoring device.
 
 
-#Problem statement and solution overview
-Clearly describe the problem being addressed.
-Explain how your proposed solution uses MCU to solve it.
+## 2. List of hardware components
 
+ESP32 board with pre-installed MicroPython firmware, USB cable
 
-We want to measure temperature, humidity, CO2, and particulate matter (PM2.5/PM10).
- - collect data every 5 minutes (or other)
- - send it to api.thingspeak.com
- - display it on a OLED display
-
-A MCU to collect data from sensors and send it by wifi and control OLED display to display it.
-
-
-#List of hardware components
-Provide a list of sensors, actuators, and other electronic components intended for use.
-Include justification for your component choices (why each part is needed).
-
+SH1106 I2C OLED display 128x64 
 
 DHT12 : temperature and humidity sensor, I2C (see lab)
-
-SDS011 : Laser dust sensor. Detect particles with a diameter >03μm, designed to measure PM2.5 and PM10 https://www.laskakit.cz/user/related_files/sds011_laser_pm2-5-v1-3.pdf
-
 
 MQ135 (with FC-22): CO2 detector, using library (to translate)
 https://hackaday.io/project/3475-sniffing-trinket/log/12363-mq135-arduino-library
 
-GP2Y1010AU0F (Sharp): Compact Optical Dust Sensor. It uses an optical sensing system (IRED diode and phototransistor) to measure light reflected by airborne dust. It's particularly effective at detecting very fine particles like cigarette smoke. https://global.sharp/products/device/lineup/data/pdf/datasheet/gp2y1010au_e.pdf
+GP2Y1010AU0F (Sharp): Compact Optical Dust Sensor. It uses an optical sensing system (IRED diode and phototransistor) to measure light reflected by airborne dust. https://global.sharp/products/device/lineup/data/pdf/datasheet/gp2y1010au_e.pdf
 
 
-#Software design
-Present system-level block diagrams, flowcharts, or pseudocode showing the planned software logic and control flow.
-
+## 3. Software design
 
 ```
 init() //sensors, OLED, wifi connection, timer
