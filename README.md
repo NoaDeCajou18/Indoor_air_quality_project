@@ -22,9 +22,7 @@ An ESP32 microcontroller is used as the core of the system. It integrates Wi-Fi 
 This creates a complete, autonomous environmental monitoring device.
 
 
-#List of hardware components
-Provide a list of sensors, actuators, and other electronic components intended for use.
-Include justification for your component choices (why each part is needed).
+## 2. List of hardware components
 
 ESP32 board with pre-installed MicroPython firmware, USB cable
 
@@ -38,9 +36,7 @@ https://hackaday.io/project/3475-sniffing-trinket/log/12363-mq135-arduino-librar
 GP2Y1010AU0F (Sharp): Compact Optical Dust Sensor. It uses an optical sensing system (IRED diode and phototransistor) to measure light reflected by airborne dust. https://global.sharp/products/device/lineup/data/pdf/datasheet/gp2y1010au_e.pdf
 
 
-#Software design
-Present system-level block diagrams, flowcharts, or pseudocode showing the planned software logic and control flow.
-
+## 3. Software design
 
 ```
 init() //sensors, OLED, wifi connection, timer
