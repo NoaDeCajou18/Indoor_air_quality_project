@@ -1,9 +1,11 @@
 # Indoor air quality monitoring system
 
-Problem Statement
+## 1. Project Overview
+
+### Problem Statement
 Indoor air quality has a direct impact on comfort, health, and productivity. Many indoor environments (classrooms, apartments, offices) lack continuous, reliable, and accessible monitoring of key air-quality indicators such as temperature Humidity, CO₂ concentration or particulate matter (PM2.5 / PM10). Without real-time monitoring, it is difficult to detect poor ventilation conditions or pollution peaks.
 
-Proposed Solution
+### Proposed Solution
 The goal of this project is to design a compact MCU-based air-quality monitoring station capable of:
 1.	Measuring multiple environmental parameters using several sensors.
 2.	Collecting data periodically (e.g., every 5 minutes).
