@@ -6,7 +6,7 @@
 Indoor air quality has a direct impact on comfort, health, and productivity. Many indoor environments (classrooms, apartments, offices) lack continuous, reliable, and accessible monitoring of key air-quality indicators such as temperature Humidity, CO₂ concentration or particulate matter (PM2.5 / PM10). Without real-time monitoring, it is difficult to detect poor ventilation conditions or pollution peaks.
 
 ### Proposed Solution
-The goal of this project is to design a compact MCU-based air-quality monitoring station An ESP32 microcontroller is used as the core of the system. It integrates Wi-Fi capability and provides enough GPIO interfaces to read the sensors and drive the display. The MCU communicates with the temperature/humidity sensor (I2C) reads the CO₂ sensor and dust sensor processes the collected data sends the data to ThingSpeak using HTTP requests updates the OLED screen with the latest values. This creates a complete, autonomous environmental monitoring device.
+The goal of this project is to design a compact MCU-based air-quality monitoring station An ESP32 microcontroller is used as the core of the system. It integrates Wi-Fi capability and provides enough GPIO interfaces to read the sensors and drive the display. The MCU communicates with the temperature/humidity sensor (I2C), reads the CO₂ sensor and dust sensor , it processes the collected data and sends them to ThingSpeak using HTTP requests and updates the OLED screen with the latest values. This creates a complete, autonomous environmental monitoring device.
 
 
 ## 2. List of hardware components
