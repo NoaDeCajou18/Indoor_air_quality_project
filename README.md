@@ -14,6 +14,8 @@ The goal of this project is to design a compact MCU-based air-quality monitoring
 2.	Collecting data periodically (e.g., every 5 minutes).
 3.	Sending the data to ThingSpeak via Wi-Fi for cloud storage, visualization, and analysis.
 4.	Displaying the measurements locally on an OLED screen in real time.
+
+
 An ESP32 microcontroller is used as the core of the system. It integrates Wi-Fi capability and provides enough GPIO interfaces to read the sensors and drive the display. The MCU:
 •	communicates with the temperature/humidity sensor (I2C)
 •	reads the CO₂ sensor and dust sensor
