@@ -1,60 +1,27 @@
-from machine import Pin, ADC
+from machine import ADC
+from hw_config import PwmLed
 import time
 
-# ---------------------------------------------------------------------------
-#  Sharp GP2Y1010AU0F Dust Sensor - MicroPython Driver
-# ---------------------------------------------------------------------------
+class GP2Y1010:
+    def __init__(self, adc_pin=34, led_pin=25):
+        # ADC pour la sortie du capteur
+        self.adc = ADC(adc_pin)
+        self.adc.atten(ADC.ATTN_11DB)
+        # LED IR via PWM
+        self.led = PwmLed(led_pin, frequency=100)  # 100 Hz → cycle = 10 ms
+        # Duty cycle correspondant à 0.32 ms / 10 ms
+        self.duty_percent = 3.2  
 
-## @brief Initialize hardware pins and ADC for the GP2Y1010 sensor.
-## LED_PIN must be wired to the LED control pin of the sensor.
-## ADC_PIN must be wired to the analog output pin (Vo) of the sensor.
-led = Pin(25, Pin.OUT)        # LED control pin (adjust if needed)
-adc = ADC(Pin(34))            # ADC input pin
-adc.atten(ADC.ATTN_11DB)      # ADC range 0–3.3V
+    def read(self):
+        # Pulse LED IR
+        self.led.on(self.duty_percent)   # LED ON pour 0.32 ms
+        time.sleep_us(1000)               # 0.32 ms
 
-# ---------------------------------------------------------------------------
-## @brief Read dust concentration from the GP2Y1010 sensor.
-##
-## The LED is pulsed ON for 280 microseconds, then the analog output
-## is sampled. After that, the LED is turned OFF and we wait 10 ms
-## to respect the sensor timing diagram.
-##
-## @return (voltage, dust)  
-##         voltage in Volts (float)  
-##         dust concentration in µg/m³ (float)
-# ---------------------------------------------------------------------------
-def read_gp2y1010():
-    # Turn on IR LED
-    led.value(1)
+        # Convertir ADC en voltage et poussière
+        voltage = val * 3.3 / 4095
+        dust = max((voltage - 0.9) * 200, 0)
+        return voltage, dust
 
-    # Wait the recommended 280 µs before reading ADC (Sharp datasheet)
-    time.sleep_us(280)
+    def deinit(self):
+        self.led.off()
 
-    # Read raw ADC value (0-4095 on ESP32)
-    val = adc.read()
-
-    # Turn LED OFF
-    led.value(0)
-
-    # Wait 10 ms before next reading (required by sensor timing)
-    time.sleep_ms(10)
-
-    # Convert ADC to voltage
-    voltage = val * 3.3 / 4095.0
-
-    # Convert voltage to dust concentration (Sharp empirical formula)
-    # Output = max(0, (Vo - 0.9) * 200)
-    dust = max((voltage - 0.9) * 200.0, 0.0)
-
-    return voltage, dust
-
-
-# ---------------------------------------------------------------------------
-#  Example usage (comment out in final integration)
-# ---------------------------------------------------------------------------
-## @brief Simple test loop printing sensor readings every second.
-if __name__ == "__main__":
-    while True:
-        voltage, dust = read_gp2y1010()
-        print("Voltage:", voltage, "V   Dust:", dust, "µg/m³")
-        time.sleep(1)
