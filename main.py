@@ -7,6 +7,7 @@ import urequests  # Network Request Module
 # Sensors
 from dht12 import DHT12
 from mq135 import MQ135
+import gp2y1010au0f
 # Display
 import i2c_display
 
@@ -33,11 +34,9 @@ def timer_handler(t):
 tim.init(period=100, mode=Timer.PERIODIC, callback=timer_handler)     # period in ms 
 
 # Sensors
-# Connect to the DHT12 sensor
 i2c = I2C(0, scl=Pin(22), sda=Pin(21), freq=400_000)
 sensor_dht12 = DHT12(i2c)
-MyMQ = MQ135(36)
-
+myMQ = MQ135(36)
 
 # Display
 i2c_display.init_oled()
@@ -60,11 +59,13 @@ wifi = network.WLAN(network.STA_IF)     # Initialize the Wi-Fi interface in Stat
 
 
 try:
+    temp, humidity = sensor_dht12.read_values()
+    myMQ.getCorrectedRZero(temp, humidity)
     while True:
         if readData:
             temp, humidity = sensor_dht12.read_values()
-            co2 = MyMQ.getCorrectedPPM(temp, humidity)
-            pm  = 2 # TODO get data
+            co2 = myMQ.getCorrectedPPM(temp, humidity)
+            v, pm  = gp2y1010au0f.read_gp2y1010()
             
             wifi_utils.connect(wifi, config.SSID, config.PSWD)
             send_to_thingspeak(temp, humidity, co2, pm)
@@ -80,3 +81,4 @@ except KeyboardInterrupt:
     # Optional cleanup code
     tim.deinit()  # Stop the timer
     wifi_utils.disconnect(wifi)
+
