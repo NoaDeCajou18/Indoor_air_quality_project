@@ -10,7 +10,7 @@ from mq135 import MQ135
 from gp2y1010_pwm import GP2Y1010
 # Display
 import i2c_display
-from gp2y1010_pwm import GP2Y1010
+
 
 #TODO adapte period of timer and period of measure
 
