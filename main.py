@@ -7,7 +7,7 @@ import urequests  # Network Request Module
 # Sensors
 from dht12 import DHT12
 from mq135 import MQ135
-import gp2y1010au0f
+from gp2y1010_pwm import GP2Y1010
 # Display
 import i2c_display
 from gp2y1010_pwm import GP2Y1010
