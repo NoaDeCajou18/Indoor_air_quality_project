@@ -10,6 +10,7 @@ from mq135 import MQ135
 import gp2y1010au0f
 # Display
 import i2c_display
+from gp2y1010_pwm import GP2Y1010
 
 #TODO adapte period of timer and period of measure
 
@@ -37,6 +38,7 @@ tim.init(period=100, mode=Timer.PERIODIC, callback=timer_handler)     # period i
 i2c = I2C(0, scl=Pin(22), sda=Pin(21), freq=400_000)
 sensor_dht12 = DHT12(i2c)
 myMQ = MQ135(36)
+sensor_pm = GP2Y1010(adc_pin=34, led_pin=25) 
 
 # Display
 i2c_display.init_oled()
