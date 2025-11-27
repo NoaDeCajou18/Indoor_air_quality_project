@@ -15,9 +15,14 @@ class GP2Y1010:
     def read(self):
         # Pulse LED IR
         self.led.on(self.duty_percent)   # LED ON pour 0.32 ms
-        time.sleep_us(1000)               # 0.32 ms
+        time.sleep_us(320)               # 0.32 ms
+        val = self.adc.read()
+        self.led.off()                   # LED OFF
+        time.sleep_ms(10-1)              # Compléter cycle à 10 ms
+        # 0.32 ms
 
         # Convertir ADC en voltage et poussière
+        val = self.adc.read()
         voltage = val * 3.3 / 4095
         dust = max((voltage - 0.9) * 200, 0)
         return voltage, dust
