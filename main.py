@@ -1,4 +1,4 @@
-from machine import Timer, I2C, Pin
+from machine import Timer, I2C, Pin, PWM
 # wifi
 import network
 import wifi_utils
@@ -37,6 +37,11 @@ tim.init(period=100, mode=Timer.PERIODIC, callback=timer_handler)     # period i
 i2c = I2C(0, scl=Pin(22), sda=Pin(21), freq=400_000)
 sensor_dht12 = DHT12(i2c)
 MyMQ = MQ135(36)
+
+# GP2Y1010 PM2.5
+adc_pm = ADC(Pin(34))
+adc_pm.atten(ADC.ATTN_11DB)  # 0–3.3V
+led_pwm = PWM(Pin(25), freq=1000, duty=0)  # PWM LED for dust sensor
 
 
 # Display
