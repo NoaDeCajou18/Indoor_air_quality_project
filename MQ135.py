@@ -6,7 +6,7 @@ class MQ135(ADC):
     # The load resistance on the board
     RLOAD = 10.0
     # Calibration resistance at atmospheric CO2 level
-    RZERO = 76.63
+    RZERO = 4.029679
     # Parameters for calculating ppm of CO2 from sensor resistance
     PARA = 116.6020682
     PARB = 2.769034857
@@ -92,7 +92,8 @@ class MQ135(ADC):
     ## @return The corrected sensor resistance RZero in kOhm
     
     def getCorrectedRZero(self, t, h) :
-        return self.getCorrectedResistance(t, h) * pow((self.ATMOCO2/self.PARA), (1./self.PARB)) 
+        RZERO = self.getCorrectedResistance(t, h) * pow((self.ATMOCO2/self.PARA), (1./self.PARB))
+        return RZERO
     
 def demo():
     MyMQ = MQ135(2)
