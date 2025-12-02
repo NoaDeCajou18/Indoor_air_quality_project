@@ -7,7 +7,7 @@ import urequests  # Network Request Module
 # Sensors
 from dht12 import DHT12
 from mq135 import MQ135
-from gp2y1010_pwm import GP2Y1010
+from gp2y1010 import GP2Y1010
 # Display
 import i2c_display
 
@@ -38,7 +38,14 @@ tim.init(period=100, mode=Timer.PERIODIC, callback=timer_handler)     # period i
 i2c = I2C(0, scl=Pin(22), sda=Pin(21), freq=400_000)
 sensor_dht12 = DHT12(i2c)
 myMQ = MQ135(36)
-sensor_pm = GP2Y1010(adc_pin=34, led_pin=25) 
+
+adc_particles = ADC(Pin(39))
+adc_particles.atten(ADC.ATTN_11DB)
+adc_particles.width(ADC.WIDTH_12BIT)
+led_particles = Pin(15, Pin.OUT)
+
+sensor_pm = GP2Y1010(adc_particles, led_particles)
+
 
 # Display
 i2c_display.init_oled()
