@@ -26,17 +26,17 @@ The goal of this project is to design a compact, MCU-based air-quality monitorin
 
 ## 2.3 Pinout table
 
-| Component                  | Component Pin / Signal | ESP32 Pin (GPIO) | Function / Role                     |
-|----------------------------|----------------------|-----------------|------------------------------------|
-| DHT12 (Temperature/Humidity) | SDA                  | 21              | I2C Data Bus (Shared)               |
-|                              | SCL                  | 22              | I2C Clock Bus (Shared)              |
-| OLED Display                | SDA                  | 21              | I2C Data Bus (Shared)               |
-|                              | SCL                  | 22              | I2C Clock Bus (Shared)              |
-| MQ-135 (CO2 Proxy)          | A0 (Analog Out)      | 36              | Analog Input (ADC)                  |
-| GP2Y1010 (Particles)        | Vo (Analog Out)      | 39              | Analog Input (ADC)                  |
-|                              | LED Control          | 15              | Digital Output (IR LED pulse)       |
-| Power                       | VCC/VDD              | 3V3             | Power Supply                        |
-| Ground                      | GND                  | GND             | Common Ground                        |
+| Component                  | Component Pin / Signal | ESP32 Pin (GPIO) | Function / Role                        |
+|----------------------------|----------------------|-----------------|----------------------------------------|
+| DHT12 (Temperature/Humidity) | SDA                  | 21              | I2C data line for reading sensor values |
+|                              | SCL                  | 22              | I2C clock line for sensor communication |
+| OLED Display                | SDA                  | 21              | Shared I2C data line to display text    |
+|                              | SCL                  | 22              | Shared I2C clock line for display       |
+| MQ-135 (CO2 Proxy)          | A0 (Analog Out)      | 36              | Measures CO₂ equivalent via ADC         |
+| GP2Y1010 (Particles)        | Vo (Analog Out)      | 39              | Reads particulate matter via ADC        |
+|                              | LED Control          | 15              | Pulses IR LED to perform particle sensing |
+| Power                       | VCC/VDD              | 3V3             | Provides 3.3V supply to sensors        |
+| Ground                      | GND                  | GND             | Common ground for all components       |
 
 ## 3. Software design
 
