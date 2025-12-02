@@ -1,32 +1,33 @@
-from machine import ADC
-from hw_config import PwmLed
 import time
 
-class GP2Y1010:
-    def __init__(self, adc_pin=34, led_pin=25):
-        # ADC pour la sortie du capteur
-        self.adc = ADC(adc_pin)
-        self.adc.atten(ADC.ATTN_11DB)
-        # LED IR via PWM
-        self.led = PwmLed(led_pin, frequency=100)  # 100 Hz → cycle = 10 ms
-        # Duty cycle correspondant à 0.32 ms / 10 ms
-        self.duty_percent = 3.2  
+def read_gp2y1010(adc_obj, led_pin_obj):
+    """
+    @brief Perform a single measurement of GP2Y1010
+    @param[in] adc_obj      ADC object connected to Vo output
+    @param[in] led_pin_obj  Pin object to control IR LED
+    @return tuple (voltage, pm25)
+             voltage : analog output in volts
+             pm25    : estimated PM2.5 concentration in µg/m³
+    """
 
-    def read(self):
-        # Pulse LED IR
-        self.led.on(self.duty_percent)   # LED ON pour 0.32 ms
-        time.sleep_us(320)               # 0.32 ms
-        val = self.adc.read()
-        self.led.off()                   # LED OFF
-        time.sleep_ms(10-1)              # Compléter cycle à 10 ms
-        # 0.32 ms
+    # Turn on IR LED for ~320 µs
+    led_pin_obj.value(1)
+    time.sleep_us(320)
 
-        # Convertir ADC en voltage et poussière
-        val = self.adc.read()
-        voltage = val * 3.3 / 4095
-        dust = max((voltage - 0.9) * 200, 0)
-        return voltage, dust
+    # Read ADC while LED is on
+    raw = adc_obj.read()
 
-    def deinit(self):
-        self.led.off()
+    # Turn off LED
+    led_pin_obj.value(0)
+
+    # Wait ~10 ms before next measurement
+    time.sleep_ms(10)
+
+    # Convert ADC value to voltage (ESP32 12-bit ADC, 0-3.3V)
+    voltage = raw * (3.3 / 4095.0)
+
+    # Estimate PM2.5 using standard linear approximation
+    pm25 = max((voltage - 0.9) / 0.005, 0)
+
+    return voltage, pm25
 
