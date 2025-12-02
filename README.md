@@ -23,7 +23,7 @@ The goal of this project is to design a compact MCU-based air-quality monitoring
 
 ## 2.2 Schematic
 
-## 2.3 Pinou table
+## 2.3 Pinout table
 
 
 ## 3. Software design
