@@ -74,7 +74,7 @@ try:
         if readData:
             temp, humidity = sensor_dht12.read_values()
             co2 = myMQ.getCorrectedPPM(temp, humidity)
-            v, pm  = gp2y1010au0f.read_gp2y1010()
+            v, pm = sensor_pm.read()
             
             wifi_utils.connect(wifi, config.SSID, config.PSWD)
             send_to_thingspeak(temp, humidity, co2, pm)
