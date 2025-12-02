@@ -22,15 +22,16 @@ https://hackaday.io/project/3475-sniffing-trinket/log/12363-mq135-arduino-librar
 
 GP2Y1010AU0F (Sharp): Compact Optical Dust Sensor. It uses an optical sensing system (IRED diode and phototransistor) to measure light reflected by airborne dust. https://global.sharp/products/device/lineup/data/pdf/datasheet/gp2y1010au_e.pdf
 
-## 📋 Hardware Components List
-| Component | Type/Function | Primary Interface | Technical Notes |
-|:---|:---|:---|:---|
-| ESP32 | Microcontroller / Dev Board | USB | Pre-installed with MicroPython firmware. |
-| USB Cable | Power / Communication | - | Connection between ESP32 and computer. |
-| SH1106 OLED 128x64 | Graphic Display | I2C | 128x64 pixels, monochrome (OLED). |
-| DHT12 | Temperature and Humidity Sensor | I2C | Measures ambient T and RH. |
-| MQ135 (with FC-22) | Air Quality Sensor (CO₂ / Gas) | Analog (via FC-22) / Digital | Requires library for data interpretation. |
-| GP2Y1010AU0F (Sharp) | Optical Dust Sensor | Analog | Uses IRED diode and phototransistor. |
+## Hardware Used
+
+| Component | Description | Interface / Notes |
+|----------|-------------|-------------------|
+| **ESP32 (MicroPython pre-installed)** | Microcontroller board programmable with MicroPython | USB / GPIO / I2C / UART |
+| **SH1106 OLED Display (128×64)** | Monochrome display compatible with MicroPython | I2C (address 0x3C) |
+| **DHT12 Sensor** | Temperature and humidity sensor | I2C (address 0x5C) |
+| **MQ135 (FC-22)** | Air quality sensor (CO₂ and various gases) | Analog output (ADC) + conversion library |
+| **GP2Y1010AU0F (Sharp)** | Optical dust sensor (PM detection using IR LED) | Analog output + LED trigger (PWM or GPIO) |
+
 ## 3. Software design
 
 ```
