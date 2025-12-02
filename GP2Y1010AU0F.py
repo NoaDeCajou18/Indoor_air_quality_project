@@ -1,33 +1,43 @@
 import time
 
-def read_gp2y1010(adc_obj, led_pin_obj):
+class GP2Y1010:
     """
-    @brief Perform a single measurement of GP2Y1010
-    @param[in] adc_obj      ADC object connected to Vo output
-    @param[in] led_pin_obj  Pin object to control IR LED
-    @return tuple (voltage, pm25)
-             voltage : analog output in volts
-             pm25    : estimated PM2.5 concentration in µg/m³
+    @class GP2Y1010
+    @brief Minimal driver using external ADC and LED Pin objects.
+           Returns voltage and PM2.5, no warnings or status LEDs.
     """
 
-    # Turn on IR LED for ~320 µs
-    led_pin_obj.value(1)
-    time.sleep_us(320)
+    ## @brief Constructor
+    ## @param[in] adc_obj      ADC object connected to Vo output
+    ## @param[in] led_pin_obj  Pin object to control IR LED
+    def __init__(self, adc_obj, led_pin_obj):
+        self.adc = adc_obj
+        self.led = led_pin_obj
+        self.led.value(0)  # Ensure LED is off at startup
 
-    # Read ADC while LED is on
-    raw = adc_obj.read()
+    ## @brief Perform a single measurement of the sensor
+    ## @return tuple (voltage, pm25)
+    ##         voltage : analog output in volts
+    ##         pm25    : estimated PM2.5 concentration in µg/m³
+    def read(self):
+        # Turn on IR LED for ~320 microseconds
+        self.led.value(1)
+        time.sleep_us(320)
 
-    # Turn off LED
-    led_pin_obj.value(0)
+        # Read ADC while LED is on
+        raw = self.adc.read()
 
-    # Wait ~10 ms before next measurement
-    time.sleep_ms(10)
+        # Turn off LED
+        self.led.value(0)
 
-    # Convert ADC value to voltage (ESP32 12-bit ADC, 0-3.3V)
-    voltage = raw * (3.3 / 4095.0)
+        # Wait ~10 ms before next measurement
+        time.sleep_ms(10)
 
-    # Estimate PM2.5 using standard linear approximation
-    pm25 = max((voltage - 0.9) / 0.005, 0)
+        # Convert ADC value to voltage (ESP32 12-bit ADC, 0-3.3V)
+        voltage = raw * (3.3 / 4095.0)
 
-    return voltage, pm25
+        # Estimate PM2.5 using standard linear approximation
+        pm25 = max((voltage - 0.9) / 0.005, 0)
+
+        return voltage, pm25
 
