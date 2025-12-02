@@ -11,15 +11,16 @@ The goal of this project is to design a compact MCU-based air-quality monitoring
 
 ## 2.1 List of hardware components
 
-| Component | Type | Primary Role / Function | Image |
-|----------|------|-------------------------|-------|
-| **ESP32 (MicroPython pre-installed)** | Microcontroller board | Runs the main program, handles sensors and display | ![ESP32](https://example.com/esp32.jpg) |
-| **SH1106 OLED Display (128×64)** | Display module | Shows sensor data and system information | ![OLED](https://example.com/oled.jpg) |
-| **DHT12** | Temperature & humidity sensor | Measures ambient temperature and relative humidity | ![DHT12](https://example.com/dht12.jpg) |
-| **MQ135 (FC-22)** | Gas / air quality sensor | Detects CO₂-equivalent and general air pollutants (analog output) | ![MQ135](https://example.com/mq135.jpg) |
-| **GP2Y1010AU0F (Sharp)** | Optical dust sensor | Measures particulate matter concentration using IR scattering | ![Dust Sensor](https://example.com/gp2y1010.jpg) |
-| **Breadboard** | Prototyping board | Allows assembling and connecting components without soldering | ![Breadboard](https://example.com/breadboard.jpg) |
-| **Jumper Wires** | Wiring accessories | Used to connect sensors, display, and ESP32 on the breadboard | ![Jumper Wires](https://example.com/jumper.jpg) |
+| Component | Type | Primary Role / Function | Datasheet / Reference |
+|----------|------|-------------------------|---------------------|
+| **ESP32 (MicroPython pre-installed)** | Microcontroller board | Runs the main program, handles sensors and display |  |
+| **SH1106 OLED Display (128×64)** | Display module | Shows sensor data and system information |  |
+| **DHT12** | Temperature & humidity sensor | Measures ambient temperature and relative humidity |  |
+| **MQ135 (FC-22)** | Gas / air quality sensor | Detects CO₂-equivalent and general air pollutants (analog output) | [MQ135 Arduino Library](https://hackaday.io/project/3475-sniffing-trinket/log/12363-mq135-arduino-library) |
+| **GP2Y1010AU0F (Sharp)** | Optical dust sensor | Measures particulate matter concentration using IR scattering | [GP2Y1010AU Datasheet](https://global.sharp/products/device/lineup/data/pdf/datasheet/gp2y1010au_e.pdf) |
+| **Breadboard** | Prototyping board | Allows assembling and connecting components without soldering |  |
+| **Jumper Wires** | Wiring accessories | Used to connect sensors, display, and ESP32 on the breadboard |  |
+
 
 
 ## 2.2 Schematic
