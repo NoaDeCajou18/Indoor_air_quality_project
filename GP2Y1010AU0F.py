@@ -34,10 +34,10 @@ class GP2Y1010:
         time.sleep_ms(10)
 
         # Convert ADC value to voltage (ESP32 12-bit ADC, 0-3.3V)
-        v = raw * (3.3 / 4095.0)
+        voltage = raw * (3.3 / 4095.0)
 
         # Estimate PM2.5 using standard linear approximation
-        pm = max((voltage - 0.9) / 0.005, 0)
+        pm25 = max((voltage - 0.9) / 0.005, 0)
 
         return voltage, pm25
 
