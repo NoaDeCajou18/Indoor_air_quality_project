@@ -22,11 +22,11 @@ class GP2Y1010:
     def read(self):
         # Turn on IR LED for ~320 microseconds
         self.led.value(1)
-        time.sleep_us(320)
+        time.sleep_us(280)
 
         # Read ADC while LED is on
         raw = self.adc.read()
-
+        time.sleep_us(40)
         # Turn off LED
         self.led.value(0)
 
