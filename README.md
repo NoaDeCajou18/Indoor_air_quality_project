@@ -16,7 +16,7 @@ The goal of this project is to design a compact, MCU-based air-quality monitorin
 | **SH1106 OLED Display (128×64)** | Display module | Shows sensor data and system information |  |
 | **DHT12** | Temperature & humidity sensor | Measures ambient temperature and relative humidity |  |
 | **MQ135 (FC-22)** | Gas / air quality sensor | Detects CO₂-equivalent and general air pollutants (analog output) | [MQ135 Arduino Library](https://hackaday.io/project/3475-sniffing-trinket/log/12363-mq135-arduino-library) |
-| **GP2Y1010AU0F (Sharp)** | Optical dust sensor | Measures particulate matter concentration using IR scattering | [https://global.sharp/products/device/lineup/data/pdf/datasheet/gp2y1010au_appl_e.pdf) |
+| **GP2Y1010AU0F (Sharp)** | Optical dust sensor | Measures particulate matter concentration using IR scattering | [GP2Y1010AU0F (Sharp) Library][https://global.sharp/products/device/lineup/data/pdf/datasheet/gp2y1010au_appl_e.pdf) |
 | **Breadboard** | Prototyping board | Allows assembling and connecting components without soldering |  |
 | **Jumper Wires** | Wiring accessories | Used to connect sensors, display, and ESP32 on the breadboard |  |
 
