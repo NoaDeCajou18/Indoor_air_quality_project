@@ -39,10 +39,10 @@ i2c = I2C(0, scl=Pin(22), sda=Pin(21), freq=400_000)
 sensor_dht12 = DHT12(i2c)
 myMQ = MQ135(36)
 
-adc_particles = ADC(Pin(39))
+adc_particles = ADC(Pin(34))
 adc_particles.atten(ADC.ATTN_11DB)
 adc_particles.width(ADC.WIDTH_12BIT)
-led_particles = Pin(15, Pin.OUT)
+led_particles = Pin(25, Pin.OUT)
 
 sensor_pm = GP2Y1010(adc_particles, led_particles)
 
