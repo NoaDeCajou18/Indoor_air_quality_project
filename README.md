@@ -19,7 +19,8 @@ The goal of this project is to design a compact, MCU-based air-quality monitorin
 | **GP2Y1010AU0F (Sharp)** | Optical dust sensor | Measures particulate matter concentration using IR scattering | [GP2Y1010AU0F (Sharp) Library](https://global.sharp/products/device/lineup/data/pdf/datasheet/gp2y1010au_appl_e.pdf) |
 | **Breadboard** | Prototyping board | Allows assembling and connecting components without soldering |  |
 | **Jumper Wires** | Wiring accessories | Used to connect sensors, display, and ESP32 on the breadboard |  |
-
+| **Resistor 150 Ω** | Passive component | Limits current to protect components like LEDs or sensors | |
+| **Capacitor 220 µF** | Passive component | Smooths voltage fluctuations, provides decoupling | |
 
 
 ## 2.2 Schematic
