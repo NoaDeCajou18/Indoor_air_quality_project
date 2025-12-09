@@ -26,7 +26,7 @@ class GP2Y1010:
 
         # Convert voltage to dust density (calibration formula)
         dust_density = max((voltage - 0.9) / 0.005, 0)  # µg/m³
-        return dust_density, raw_value, voltage
+        return dust_density
 
 
 
