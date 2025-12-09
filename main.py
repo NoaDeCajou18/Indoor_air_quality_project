@@ -1,13 +1,13 @@
-from machine import Timer, I2C, Pin
+from machine import Timer, I2C, Pin, ADC
 # wifi
 import network
 import wifi_utils
-import config # name and password of network
+import wifi_config # name and password of network
 import urequests  # Network Request Module
 # Sensors
 from dht12 import DHT12
 from mq135 import MQ135
-from gp2y1010 import GP2Y1010
+from gp2y1010au0f import GP2Y1010
 # Display
 import i2c_display
 
@@ -39,12 +39,12 @@ i2c = I2C(0, scl=Pin(22), sda=Pin(21), freq=400_000)
 sensor_dht12 = DHT12(i2c)
 myMQ = MQ135(36)
 
-adc_particles = ADC(Pin(39))
-adc_particles.atten(ADC.ATTN_11DB)
-adc_particles.width(ADC.WIDTH_12BIT)
-led_particles = Pin(15, Pin.OUT)
+# adc_particles = ADC(Pin(39))
+# adc_particles.atten(ADC.ATTN_11DB)
+# adc_particles.width(ADC.WIDTH_12BIT)
+# led_particles = Pin(15, Pin.OUT)
 
-sensor_pm = GP2Y1010(adc_particles, led_particles)
+sensor_pm = GP2Y1010(25,34)
 
 
 # Display
@@ -52,12 +52,12 @@ i2c_display.init_oled()
 
 
 # Wifi
-API_KEY = "IHK5I6MLU9OLLS9V" 
+#API_KEY = "IHK5I6MLU9OLLS9V" 
 def send_to_thingspeak(temp, humidity,co2, pm):
-    API_URL = "https://api.thingspeak.com/update"
+    #wifi_config.API_URL = "https://api.thingspeak.com/update"
 
     # GET request
-    url = f"{API_URL}?api_key={API_KEY}&field1={temp}&field2={humidity}&field3={co2}&field4={pm}"
+    url = f"{wifi_config.API_URL}?api_key={wifi_config.API_KEY}&field1={temp}&field2={humidity}&field3={co2}&field4={pm}"
     response = urequests.get(url)
 
     print(f"Entry # sent to ThingSpeak: {response.text}")
@@ -74,9 +74,11 @@ try:
         if readData:
             temp, humidity = sensor_dht12.read_values()
             co2 = myMQ.getCorrectedPPM(temp, humidity)
-            v, pm = sensor_pm.read()
+            pm, rv, v = sensor_pm.read_dust_density()
+            print(rv)
+            print(v)
             
-            wifi_utils.connect(wifi, config.SSID, config.PSWD)
+            wifi_utils.connect(wifi, wifi_config.SSID, wifi_config.PSWD)
             send_to_thingspeak(temp, humidity, co2, pm)
             wifi_utils.disconnect(wifi)
 

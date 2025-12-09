@@ -5,26 +5,28 @@ class GP2Y1010:
 
     def __init__(self, led_pin, adc_pin):
         self.led = Pin(led_pin, Pin.OUT)  # LED control pin
-        adc = ADC(Pin(adc_pin))         # Analog input pin
-        adc.width(ADC.WIDTH_12BIT) # 12-bit ADC resolution
-        adc.atten(ADC.ATTN_11DB)   # Full-scale voltage (up to 3.3V)
-
+        self.adc = ADC(Pin(adc_pin))         # Analog input pin
+        self.adc.width(ADC.WIDTH_12BIT) # 12-bit ADC resolution
+        self.adc.atten(ADC.ATTN_11DB)   # Full-scale voltage (up to 3.3V)
+        
 
     # Pin definitions
     
 
     def read_dust_density(self):
-        self.led_pin.value(1)
+        self.led.value(1)
         time.sleep_us(280)  # LED pulse width
         raw_value = self.adc.read()
-        led_pin.value(0)
-
+        time.sleep_us(40)
+        self.led.value(0)
+        
+        
         # Convert raw ADC value to voltage (assuming 3.3V reference)
         voltage = raw_value * (3.3 / 4095.0)
 
         # Convert voltage to dust density (calibration formula)
-        dust_density = (voltage - 0.4) / 0.05  # µg/m³
-        return dust_density
+        dust_density = max((voltage - 0.9) / 0.005, 0)  # µg/m³
+        return dust_density, raw_value, voltage
 
 
 
