@@ -34,8 +34,8 @@ The goal of this project is to design a compact, MCU-based air-quality monitorin
 | OLED Display                | SDA                  | 21              | Shared I2C data line to display text    |
 |                              | SCL                  | 22              | Shared I2C clock line for display       |
 | MQ-135 (CO2 Proxy)          | A0 (Analog Out)      | 36              | Measures CO₂ equivalent via ADC         |
-| GP2Y1010 (Particles)        | Vo (Analog Out)      | 39              | Reads particulate matter via ADC        |
-|                              | LED Control          | 15              | Pulses IR LED to perform particle sensing |
+| GP2Y1010 (Particles)        | Vo (Analog Out)      | 34              | Reads particulate matter via ADC        |
+|                              | LED Control          | 25              | Pulses IR LED to perform particle sensing |
 | Power                       | VCC/VDD              | 3V3             | Provides 3.3V supply to sensors        |
 | Ground                      | GND                  | GND             | Common ground for all components       |
 
