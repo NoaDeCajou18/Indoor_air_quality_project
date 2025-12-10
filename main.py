@@ -74,7 +74,7 @@ try:
         if readData:
             temp, humidity = sensor_dht12.read_values()
             co2 = myMQ.getCorrectedPPM(temp, humidity)
-            pm, rv, v = sensor_pm.read_dust_density()
+            pm = sensor_pm.read_dust_density()
             print(rv)
             print(v)
             
