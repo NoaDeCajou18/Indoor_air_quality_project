@@ -75,8 +75,6 @@ try:
             temp, humidity = sensor_dht12.read_values()
             co2 = myMQ.getCorrectedPPM(temp, humidity)
             pm = sensor_pm.read_dust_density()
-            print(rv)
-            print(v)
             
             wifi_utils.connect(wifi, wifi_config.SSID, wifi_config.PSWD)
             send_to_thingspeak(temp, humidity, co2, pm)
