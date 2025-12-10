@@ -24,6 +24,7 @@ The goal of this project is to design a compact, MCU-based air-quality monitorin
 
 
 ## 2.2 Schematic
+![image info](images/shematic.png)
 
 ## 2.3 Pinout table
 
