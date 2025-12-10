@@ -37,7 +37,7 @@ The goal of this project is to design a compact, MCU-based air-quality monitorin
 | MQ-135 (CO2 Proxy)          | A0 (Analog Out)      | 36              | Measures CO₂ equivalent via ADC         |
 | GP2Y1010 (Particles)        | Vo (Analog Out)      | 34              | Reads particulate matter via ADC        |
 |                              | LED Control          | 25              | Pulses IR LED to perform particle sensing |
-|                              | VCC                 | 5 V             |  Provides 5V supply to dust sensor   |
+|                              | VCC                 | 5 V  (outside of ESP32)           |  Provides 5V supply to dust sensor   |
 | Power                       | VCC/VDD              | 3.3V             | Provides 3.3V supply to sensors        |
 | Ground                      | GND                  | GND             | Common ground for all components       |
 
