@@ -29,7 +29,7 @@ tim = Timer(1)
 def timer_handler(t):
     global cnt, readData
     cnt += 1
-    if cnt % PERIODE_MEASURES == 0 :
+    if cnt % PERIODE_MEASURES == 0:
         readData = True
 
 tim.init(period=100, mode=Timer.PERIODIC, callback=timer_handler)     # period in ms 
@@ -37,13 +37,7 @@ tim.init(period=100, mode=Timer.PERIODIC, callback=timer_handler)     # period i
 # Sensors
 i2c = I2C(0, scl=Pin(22), sda=Pin(21), freq=400_000)
 sensor_dht12 = DHT12(i2c)
-myMQ = MQ135(36)
-
-# adc_particles = ADC(Pin(39))
-# adc_particles.atten(ADC.ATTN_11DB)
-# adc_particles.width(ADC.WIDTH_12BIT)
-# led_particles = Pin(15, Pin.OUT)
-
+sensor_MQ = MQ135(36)
 sensor_pm = GP2Y1010(25,34)
 
 
@@ -51,10 +45,8 @@ sensor_pm = GP2Y1010(25,34)
 i2c_display.init_oled()
 
 
-# Wifi
-#API_KEY = "IHK5I6MLU9OLLS9V" 
-def send_to_thingspeak(temp, humidity,co2, pm):
-    #wifi_config.API_URL = "https://api.thingspeak.com/update"
+# Wifi 
+def send_to_thingspeak(temp, humidity, co2, pm):
 
     # GET request
     url = f"{wifi_config.API_URL}?api_key={wifi_config.API_KEY}&field1={temp}&field2={humidity}&field3={co2}&field4={pm}"
@@ -69,11 +61,11 @@ wifi = network.WLAN(network.STA_IF)     # Initialize the Wi-Fi interface in Stat
 
 try:
     temp, humidity = sensor_dht12.read_values()
-    myMQ.getCorrectedRZero(temp, humidity)
+    sensor_MQ.getCorrectedRZero(temp, humidity)
     while True:
         if readData:
             temp, humidity = sensor_dht12.read_values()
-            co2 = myMQ.getCorrectedPPM(temp, humidity)
+            co2 = sensor_MQ.getCorrectedPPM(temp, humidity)
             pm = sensor_pm.read_dust_density()
             
             wifi_utils.connect(wifi, wifi_config.SSID, wifi_config.PSWD)
